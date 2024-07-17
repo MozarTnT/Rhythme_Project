@@ -11,10 +11,14 @@ public class TimingManager : MonoBehaviour
     Vector2[] timingBoxes = null;
 
     EffectManager theEffect;
+    ScoreManager theScoreManager;
+    ComboManager theComboManager;
 
     void Start()
     {
         theEffect = FindObjectOfType<EffectManager>();
+        theScoreManager = FindObjectOfType<ScoreManager>();
+        theComboManager = FindObjectOfType<ComboManager>();
 
         //타이밍 박스
 
@@ -37,16 +41,27 @@ public class TimingManager : MonoBehaviour
             {
                 if (timingBoxes[x].x <= t_notePosX && t_notePosX <= timingBoxes[x].y)
                 {
+                    // 노트 제거
                     boxNoteList[i].GetComponent<Note>().HideNote();
-                    theEffect.NoteHitEffect(); 
                     boxNoteList.RemoveAt(i);
-                    Debug.Log("Hit" + x);
+
+                    // 이펙트 연출
+                    if (x < timingBoxes.Length - 1)
+                    {
+                        theEffect.NoteHitEffect();
+                    }
+                    theEffect.JudgementEffect(x);
+                    
+                    theScoreManager.IncreaseScore(x);
                     return;
                 }
             }
 
         }
-        Debug.Log("Miss");
+        //Debug.Log("Miss");
+
+        theComboManager.ResetCombo();
+        theEffect.JudgementEffect(timingBoxes.Length);
     }
 
 }
