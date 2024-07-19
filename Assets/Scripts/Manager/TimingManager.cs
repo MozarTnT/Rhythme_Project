@@ -13,12 +13,16 @@ public class TimingManager : MonoBehaviour
     EffectManager theEffect;
     ScoreManager theScoreManager;
     ComboManager theComboManager;
+    StageManager theStageManager;
+    PlayerController thePlayer;
 
     void Start()
     {
         theEffect = FindObjectOfType<EffectManager>();
         theScoreManager = FindObjectOfType<ScoreManager>();
         theComboManager = FindObjectOfType<ComboManager>();
+        theStageManager = FindObjectOfType<StageManager>();
+        thePlayer = FindObjectOfType<PlayerController>();
 
         //타이밍 박스
 
@@ -50,9 +54,18 @@ public class TimingManager : MonoBehaviour
                     {
                         theEffect.NoteHitEffect();
                     }
-                    theEffect.JudgementEffect(x);
-                    
-                    theScoreManager.IncreaseScore(x);
+
+
+                    if(CheckCanNextPlate())
+                    {
+                        theScoreManager.IncreaseScore(x); // 점수 증가
+                        theStageManager.ShowNextPlates(); // 다음 발판 생성
+                        theEffect.JudgementEffect(x);
+                    }
+                    else
+                    {
+                        theEffect.JudgementEffect(5);
+                    }
                     return true;
                 }
             }
@@ -65,4 +78,23 @@ public class TimingManager : MonoBehaviour
         return false;
     }
 
+
+    bool CheckCanNextPlate()
+    {
+        if(Physics.Raycast(thePlayer.destPos, Vector3.down, out RaycastHit t_hitInfo, 1.1f))
+        {
+            if(t_hitInfo.transform.CompareTag("BasicPlate"))
+            {
+                BasicPlate t_plate = t_hitInfo.transform.GetComponent<BasicPlate>();
+                if(t_plate.flag)
+                {
+                    t_plate.flag = false;
+                    return true;
+                }
+            }
+
+        }
+
+        return false;
+    }
 }
