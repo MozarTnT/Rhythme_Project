@@ -55,7 +55,6 @@ public class TimingManager : MonoBehaviour
                         theEffect.NoteHitEffect();
                     }
 
-
                     if(CheckCanNextPlate())
                     {
                         theScoreManager.IncreaseScore(x); // 점수 증가
@@ -69,7 +68,6 @@ public class TimingManager : MonoBehaviour
                     return true;
                 }
             }
-
         }
         //Debug.Log("Miss");
 
@@ -92,7 +90,6 @@ public class TimingManager : MonoBehaviour
                     return true;
                 }
             }
-
         }
 
         return false;

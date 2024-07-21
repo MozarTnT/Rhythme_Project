@@ -36,7 +36,6 @@ public class ComboManager : MonoBehaviour
 
     public int GetCurrentCombo()
     {
-
         return currentCombo;
     }
 

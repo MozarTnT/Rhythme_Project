@@ -16,12 +16,10 @@ public class EffectManager : MonoBehaviour
     {
         judgementImage.sprite = judgementSprite[p_num];
         judgementAnimator.SetTrigger(hit);
-
     }
 
     public void NoteHitEffect()
     {
         noteHitAnimator.SetTrigger(hit);
-
     }
 }

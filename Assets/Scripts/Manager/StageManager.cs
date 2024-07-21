@@ -27,11 +27,6 @@ public class StageManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        
-    }
-
     public void ShowNextPlates()
     {
         if(stepCount < totalPlateCount)
