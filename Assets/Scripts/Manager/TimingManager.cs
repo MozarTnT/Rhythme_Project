@@ -6,6 +6,9 @@ public class TimingManager : MonoBehaviour
 {
     public List<GameObject> boxNoteList = new List<GameObject>();
 
+    int[] judgementRecord = new int[5];
+
+
     [SerializeField] Transform Center = null;
     [SerializeField] RectTransform[] timingRect = null;
     Vector2[] timingBoxes = null;
@@ -28,7 +31,7 @@ public class TimingManager : MonoBehaviour
 
         timingBoxes = new Vector2[timingRect.Length];
 
-        for(int i = 0; i < timingRect.Length; i++)
+        for (int i = 0; i < timingRect.Length; i++)
         {
             timingBoxes[i].Set(Center.localPosition.x - timingRect[i].rect.width / 2,
                                Center.localPosition.x + timingRect[i].rect.width / 2);
@@ -37,11 +40,11 @@ public class TimingManager : MonoBehaviour
 
     public bool CheckTiming()
     {
-        for(int i = 0; i < boxNoteList.Count; i++)
+        for (int i = 0; i < boxNoteList.Count; i++)
         {
             float t_notePosX = boxNoteList[i].transform.localPosition.x;
 
-            for(int x = 0; x < timingBoxes.Length; x++)
+            for (int x = 0; x < timingBoxes.Length; x++)
             {
                 if (timingBoxes[x].x <= t_notePosX && t_notePosX <= timingBoxes[x].y)
                 {
@@ -55,11 +58,12 @@ public class TimingManager : MonoBehaviour
                         theEffect.NoteHitEffect();
                     }
 
-                    if(CheckCanNextPlate())
+                    if (CheckCanNextPlate())
                     {
                         theScoreManager.IncreaseScore(x); // 점수 증가
                         theStageManager.ShowNextPlates(); // 다음 발판 생성
-                        theEffect.JudgementEffect(x);
+                        theEffect.JudgementEffect(x); // 판정 연출
+                        judgementRecord[x]++; // 판정 기록
                     }
                     else
                     {
@@ -73,18 +77,19 @@ public class TimingManager : MonoBehaviour
 
         theComboManager.ResetCombo();
         theEffect.JudgementEffect(timingBoxes.Length);
+        MissRecord();
         return false;
     }
 
 
     bool CheckCanNextPlate()
     {
-        if(Physics.Raycast(thePlayer.destPos, Vector3.down, out RaycastHit t_hitInfo, 1.1f))
+        if (Physics.Raycast(thePlayer.destPos, Vector3.down, out RaycastHit t_hitInfo, 1.1f))
         {
-            if(t_hitInfo.transform.CompareTag("BasicPlate"))
+            if (t_hitInfo.transform.CompareTag("BasicPlate"))
             {
                 BasicPlate t_plate = t_hitInfo.transform.GetComponent<BasicPlate>();
-                if(t_plate.flag)
+                if (t_plate.flag)
                 {
                     t_plate.flag = false;
                     return true;
@@ -93,5 +98,15 @@ public class TimingManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public int[] GetJudgementRecord()
+    {
+        return judgementRecord;
+    }
+
+    public void MissRecord()  // miss 판정 기록
+    {
+        judgementRecord[4]++;
     }
 }
