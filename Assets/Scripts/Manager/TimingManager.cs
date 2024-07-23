@@ -17,15 +17,20 @@ public class TimingManager : MonoBehaviour
     ScoreManager theScoreManager;
     ComboManager theComboManager;
     StageManager theStageManager;
+    StatusManager theStatusManager;
+    AudioManager theAudioManager;
     PlayerController thePlayer;
+
 
     void Start()
     {
+        theAudioManager = AudioManager.instance;
         theEffect = FindObjectOfType<EffectManager>();
         theScoreManager = FindObjectOfType<ScoreManager>();
         theComboManager = FindObjectOfType<ComboManager>();
         theStageManager = FindObjectOfType<StageManager>();
         thePlayer = FindObjectOfType<PlayerController>();
+        theStatusManager = FindObjectOfType<StatusManager>();
 
         //타이밍 박스
 
@@ -64,11 +69,14 @@ public class TimingManager : MonoBehaviour
                         theStageManager.ShowNextPlates(); // 다음 발판 생성
                         theEffect.JudgementEffect(x); // 판정 연출
                         judgementRecord[x]++; // 판정 기록
+                        theStatusManager.CheckShield();
                     }
                     else
                     {
                         theEffect.JudgementEffect(5);
                     }
+
+                    theAudioManager.PlaySFX("Clap");
                     return true;
                 }
             }
@@ -108,5 +116,6 @@ public class TimingManager : MonoBehaviour
     public void MissRecord()  // miss 판정 기록
     {
         judgementRecord[4]++;
+        theStatusManager.ResetShieldCombo();
     }
 }

@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     TimingManager theTimingManager;
     CameraController theCam;
     Rigidbody myRigid;
+    StatusManager theStatus;
 
 
     void Start()
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
         theTimingManager = FindObjectOfType<TimingManager>();
         theCam = FindObjectOfType<CameraController>();
         myRigid = GetComponentInChildren<Rigidbody>();
+        theStatus = FindObjectOfType<StatusManager>();
         originPos = transform.position;
     }
 
@@ -152,11 +154,20 @@ public class PlayerController : MonoBehaviour
 
     public void ResetFalling()
     {
-        isFalling = false;
-        myRigid.useGravity = false;
-        myRigid.isKinematic = true;
+        theStatus.DecreaseHP(1);
+        AudioManager.instance.PlaySFX("Falling");
 
-        transform.position = originPos;
-        realCube.localPosition = new Vector3(0, 0, 0);
+        if(!theStatus.IsDead())
+        {
+            isFalling = false;
+            myRigid.useGravity = false;
+            myRigid.isKinematic = true;
+
+            transform.position = originPos;
+            realCube.localPosition = new Vector3(0, 0, 0);
+        }
+
+
+   
     }
 }

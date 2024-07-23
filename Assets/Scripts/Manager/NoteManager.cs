@@ -10,7 +10,6 @@ public class NoteManager : MonoBehaviour
     bool noteActive = true;
 
     [SerializeField] Transform tfNoteAppear = null;
-    //[SerializeField] GameObject goNote = null;
 
     TimingManager theTimingManager;
     EffectManager theeffectManager;
@@ -34,8 +33,6 @@ public class NoteManager : MonoBehaviour
                 t_note.transform.position = tfNoteAppear.position;
 
                 t_note.SetActive(true);
-                //GameObject t_note = Instantiate(goNote, tfNoteAppear.position, Quaternion.identity);
-                //t_note.transform.SetParent(this.transform);
                 theTimingManager.boxNoteList.Add(t_note);
                 currentTime -= 60d / bpm; // 0으로 초기화 하면 time.deltatime을 더해주면서 오차가 생김
             }
@@ -57,8 +54,6 @@ public class NoteManager : MonoBehaviour
             theTimingManager.boxNoteList.Remove(collision.gameObject);
             ObjectPool.instance.noteQueue.Enqueue(collision.gameObject);
             collision.gameObject.SetActive(false);
-
-            //Destroy(collision.gameObject);
 
         }
     }
