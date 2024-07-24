@@ -11,6 +11,7 @@ public class EffectManager : MonoBehaviour
     [SerializeField] Sprite[] judgementSprite = null;
 
     string hit = "Hit";
+    string end = "End";
 
     public void JudgementEffect(int p_num)
     {
@@ -18,8 +19,16 @@ public class EffectManager : MonoBehaviour
         judgementAnimator.SetTrigger(hit);
     }
 
+    public void JudgementEffectEnd()
+    {
+        judgementImage.enabled = false;
+        judgementAnimator.SetTrigger(end);
+    }
+
     public void NoteHitEffect()
     {
         noteHitAnimator.SetTrigger(hit);
     }
+
+
 }

@@ -49,21 +49,35 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        CheckFalling();
-
-
-        if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)) 
+        if(GameManager.instance.isStartGame)
         {
-            if (canMove && s_canPressKey && !isFalling)
-            {
-                Calc();
+            CheckFalling();
 
-                if (theTimingManager.CheckTiming())
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+            {
+                if (canMove && s_canPressKey && !isFalling)
                 {
-                    StartAction();
+                    Calc();
+
+                    if (theTimingManager.CheckTiming())
+                    {
+                        StartAction();
+                    }
                 }
             }
         }
+    }
+
+    public void Initialized()
+    {
+        transform.position = Vector3.zero;
+        destPos = Vector3.zero;
+        realCube.localPosition = Vector3.zero;
+        canMove = true;
+        s_canPressKey = true;
+        isFalling = false;
+        myRigid.useGravity = false;
+        myRigid.isKinematic = true;
     }
 
 

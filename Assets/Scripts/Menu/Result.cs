@@ -13,19 +13,29 @@ public class Result : MonoBehaviour
     [SerializeField] TextMeshProUGUI txtScore = null;
     [SerializeField] TextMeshProUGUI txtMaxCombo = null;
 
+    [SerializeField] GameObject JudgementImage;
+
     ScoreManager theScore;
     ComboManager theCombo;
     TimingManager theTiming;
+    EffectManager theEffect;
 
     void Start()
     {
         theScore = FindObjectOfType<ScoreManager>();
         theCombo = FindObjectOfType<ComboManager>();
         theTiming = FindObjectOfType<TimingManager>();
+        theEffect = FindObjectOfType<EffectManager>();
     }
 
     public void ShowResult()
     {
+        FindObjectOfType<CenterFrame>().ResetMusic();
+
+        AudioManager.instance.StopBGM();
+
+        theEffect.JudgementEffectEnd();
+
         goUI.SetActive(true);
 
         for(int i = 0; i < txtCount.Length; i++)
@@ -52,5 +62,12 @@ public class Result : MonoBehaviour
         txtCoin.text = string.Format("{0:#,##0}", t_coin);
 
 
+    }
+
+    public void BtnMainMenu()
+    {
+        goUI.SetActive(false);
+        GameManager.instance.MainMenu();
+        theCombo.ResetCombo();
     }
 }

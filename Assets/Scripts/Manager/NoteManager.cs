@@ -7,8 +7,6 @@ public class NoteManager : MonoBehaviour
     public int bpm = 0;
     double currentTime = 0d;
 
-    bool noteActive = true;
-
     [SerializeField] Transform tfNoteAppear = null;
 
     TimingManager theTimingManager;
@@ -23,7 +21,7 @@ public class NoteManager : MonoBehaviour
     }
     void Update()
     {
-        if(noteActive)
+        if(GameManager.instance.isStartGame)
         {
             currentTime += Time.deltaTime;
 
@@ -61,13 +59,14 @@ public class NoteManager : MonoBehaviour
 
     public void RemoveNote() // Goal 도착 후 note 비활성화
     {
-        noteActive = false;
+        GameManager.instance.isStartGame = false;
 
         for(int i = 0; i < theTimingManager.boxNoteList.Count; i++)
         {
-            theTimingManager.boxNoteList[i].gameObject.SetActive(false); // 남은 노트들 비활성화
+            theTimingManager.boxNoteList[i].SetActive(false); // 남은 노트들 비활성화
             ObjectPool.instance.noteQueue.Enqueue(theTimingManager.boxNoteList[i]); // 오브젝트 풀에 반납
         }
 
+        theTimingManager.boxNoteList.Clear();
     }
 }
