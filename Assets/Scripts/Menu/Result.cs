@@ -15,17 +15,26 @@ public class Result : MonoBehaviour
 
     [SerializeField] GameObject JudgementImage;
 
+    int currentSong = 0; // 현재 스테이지 참조용
+
+
     ScoreManager theScore;
     ComboManager theCombo;
     TimingManager theTiming;
     EffectManager theEffect;
-
+    DatabaseManager theDatabase;
     void Start()
     {
         theScore = FindObjectOfType<ScoreManager>();
         theCombo = FindObjectOfType<ComboManager>();
         theTiming = FindObjectOfType<TimingManager>();
         theEffect = FindObjectOfType<EffectManager>();
+        theDatabase = FindObjectOfType<DatabaseManager>();
+    }
+
+    public void SetCurrentSong(int p_songNum) // 현재 스테이지 참조용
+    {
+        currentSong = p_songNum;
     }
 
     public void ShowResult()
@@ -60,6 +69,13 @@ public class Result : MonoBehaviour
         txtScore.text = string.Format("{0:#,##0}", t_currentScore);
         txtMaxCombo.text = string.Format("{0:#,##0}", t_maxCombo);
         txtCoin.text = string.Format("{0:#,##0}", t_coin);
+
+
+        if(t_currentScore > theDatabase.score[currentSong])
+        {
+            theDatabase.score[currentSong] = t_currentScore;
+            theDatabase.SaveScore();
+        }
 
 
     }

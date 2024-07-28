@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     PlayerController thePlayer;
     StageManager theStage;
     NoteManager theNote;
+    Result theResult;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
         thePlayer = FindObjectOfType<PlayerController>();
         theStage = FindObjectOfType<StageManager>();
         theNote = FindObjectOfType<NoteManager>();
+        theResult = FindObjectOfType<Result>();
     }
 
 
@@ -51,7 +53,7 @@ public class GameManager : MonoBehaviour
         theTiming.Initialized();
         theStatus.Initialized();
         thePlayer.Initialized();
-
+        theResult.SetCurrentSong(p_songNum); // 현재 스테이지 값 보내주기
 
         AudioManager.instance.StopBGM(); // 게임 시작시 노래 중지
 
