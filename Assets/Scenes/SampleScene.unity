@@ -5995,15 +5995,15 @@ MonoBehaviour:
   songList:
   - name: Song 1
     composer: JYJ1
-    bpm: 128
+    bpm: 130
     sprite: {fileID: 21300000, guid: be98ba8dc7c79ee42862dfde3ac065c4, type: 3}
   - name: Song 2
     composer: JYJ2
-    bpm: 124
+    bpm: 80
     sprite: {fileID: 21300000, guid: 3bdb5aa3db4096941b9a3f96b234cd3d, type: 3}
   - name: Song 3
     composer: JYJ3
-    bpm: 132
+    bpm: 150
     sprite: {fileID: 21300000, guid: 54a1327d291d5f14fa446eb53e079e15, type: 3}
   txtSongName: {fileID: 1183992585}
   txtSongComposer: {fileID: 551665120}
@@ -7457,8 +7457,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294931968
-  m_fontColor: {r: 0, g: 0.4639573, b: 1, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7591,8 +7591,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294930944
-  m_fontColor: {r: 0, g: 0.44830537, b: 1, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
