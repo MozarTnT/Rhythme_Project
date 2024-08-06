@@ -10,13 +10,13 @@ public class PlayerController : MonoBehaviour
     public static bool s_canPressKey = true;
 
     // 이동
-    [SerializeField] float moveSpeed = 3.0f;
+    [SerializeField] float moveSpeed = 5.0f;
     Vector3 dir = new Vector3();
     public Vector3 destPos = new Vector3();
     Vector3 originPos = new Vector3();
 
     // 회전
-    [SerializeField] float spinSpeed = 270.0f;
+    [SerializeField] float spinSpeed = 360.0f;
     Vector3 rotDir = new Vector3();
     Quaternion destRot = new Quaternion();
 

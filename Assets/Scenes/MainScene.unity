@@ -6013,6 +6013,10 @@ MonoBehaviour:
     composer: JYJ5
     bpm: 140
     sprite: {fileID: 21300000, guid: cceb8618787fcce49b913111e3ccef42, type: 3}
+  - name: Song 6
+    composer: JYJ6
+    bpm: 126
+    sprite: {fileID: 21300000, guid: ec76e1207731f6f4e90307c4b883e615, type: 3}
   txtSongName: {fileID: 1183992585}
   txtSongComposer: {fileID: 551665120}
   txtSongScore: {fileID: 1136832119}
@@ -8636,6 +8640,7 @@ MonoBehaviour:
   - {fileID: 6439241206084800466, guid: bfdb1483c6724314a8b7ff80c8c57636, type: 3}
   - {fileID: 7211510664136594288, guid: 79eea49ea335c4847874ddc8242aeb3b, type: 3}
   - {fileID: 7211510664136594288, guid: a652be58536a33b429ac41f7952ab924, type: 3}
+  - {fileID: 7211510664136594288, guid: 1560c7c2071115145a6797ce66ee042d, type: 3}
   offsetY: -5
   plateSpeed: 10
 --- !u!1 &1830891412
@@ -9388,7 +9393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86a2d78809891548baf3ac5a7881a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0000000000000000000000000000000000000000
+  score: 000000000000000000000000000000000000000000000000
 --- !u!1 &2071633297
 GameObject:
   m_ObjectHideFlags: 0
@@ -9585,6 +9590,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: ef435a6046a050a4c88fae4b4910a9f8, type: 3}
   - name: BGM4
     clip: {fileID: 8300000, guid: 801d927fc92988e4bb1670de21bb86ec, type: 3}
+  - name: BGM5
+    clip: {fileID: 8300000, guid: 84a094c2f7a56cc4090805434b2281ee, type: 3}
   bgmPlayer: {fileID: 1172927704}
   sfxPlayer:
   - {fileID: 987054142}
